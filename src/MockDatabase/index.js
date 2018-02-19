@@ -7,7 +7,7 @@ import CategoryLesson from './models/CategoryLesson';
 import Category from './models/Category';
 import CategoryRelationship from './models/CategoryRelationship';
 
-const data = {
+const MockDatabase = {
   categoryWithAllChildren: function(categoryId) {
     const categoryWithAllChildren = this.findCategory(categoryId);
 
@@ -91,4 +91,4 @@ const data = {
   }
 };
 
-export default data;
+export default MockDatabase;
