@@ -24,14 +24,14 @@ class App extends Component {
   }
 
   getCurrentPath = () => {
-    return window.location.pathname.split('/').slice(1);
+    return window.location.pathname.split('/').filter(pathElement => pathElement !== '');
   }
 
   setCurrentPageData() {
     let notFound;
     let index = 0;
+
     let lastParentCategory = this.state.data;
-    const currentPageLevel = this.state.currentPath.length - 1;
     const breadCrumbItems = [
       {
         url: '/',
@@ -44,8 +44,6 @@ class App extends Component {
 
       lastParentCategory = this.getChildCategory(lastParentCategory, categoryId);
 
-      if (index === currentPageLevel) this.setState({ currentPageData: lastParentCategory });
-
       if (lastParentCategory) {
         const url = breadCrumbItems[breadCrumbItems.length - 1].url + lastParentCategory.id + '/';
         const categoryName = lastParentCategory.name;
@@ -57,7 +55,7 @@ class App extends Component {
       };
     };
 
-    notFound ? this.setState({ notFound }) : this.setState({ breadCrumbItems });
+    notFound ? this.setState({ notFound }) : this.setState({ currentPageData: lastParentCategory, breadCrumbItems });
   }
 
   getChildCategory(parentCategoryObject, childCategoryId) {
