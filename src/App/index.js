@@ -3,7 +3,7 @@ import MockDatabase from 'MockDatabase';
 import 'antd/dist/antd.css'
 import { Layout } from 'antd';
 import NotFound from './scenes/NotFound';
-import Category from './scenes/Category';
+import Content from './scenes/Content';
 
 class App extends Component {
   constructor(props) {
@@ -13,7 +13,10 @@ class App extends Component {
       data: {},
       currentPath: [],
       breadCrumbItems: [],
-      currentPageData: {},
+      currentPageData: {
+        categories: [],
+        lessons: []
+      },
       notFound: false
     };
   }
@@ -45,7 +48,7 @@ class App extends Component {
     ];
 
     while(!notFound && this.state.currentPath[index]) {
-      const categoryId = parseInt(this.state.currentPath[index]);
+      const categoryId = parseInt(this.state.currentPath[index], 10);
 
       lastParentCategory = this.getChildCategory(lastParentCategory, categoryId);
 
@@ -80,7 +83,7 @@ class App extends Component {
           {notFound ? (
             <NotFound />
           ) : (
-            <Category breadCrumbItems={breadCrumbItems} currentPageData={currentPageData} />
+            <Content breadCrumbItems={breadCrumbItems} currentPageData={currentPageData} />
           )}
         </Layout.Content>
       </Layout>

@@ -13,15 +13,11 @@ const MockDatabase = {
 
     categoryWithAllChildren.categories = this.findCategoryChildren(categoryId);
     // get child categories of child categories
-    categoryWithAllChildren.categories.map((childCategory, index) => {
-      categoryWithAllChildren.categories[index] = this.categoryWithAllChildren(childCategory.id);
-    });
+    categoryWithAllChildren.categories.map((childCategory, index) => categoryWithAllChildren.categories[index] = this.categoryWithAllChildren(childCategory.id));
 
     categoryWithAllChildren.lessons = this.findCategoryLessons(categoryId);
     // get materials of lessons
-    categoryWithAllChildren.lessons.map((categoryLesson, index) => {
-      categoryWithAllChildren.lessons[index].materials = this.findLessonMaterials(categoryLesson.id);
-    });
+    categoryWithAllChildren.lessons.map((categoryLesson, index) => categoryWithAllChildren.lessons[index].materials = this.findLessonMaterials(categoryLesson.id));
 
     return categoryWithAllChildren;
   },

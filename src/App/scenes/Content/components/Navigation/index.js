@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Breadcrumb } from 'antd';
 
 const Navigation = props => {
   const {
-    breadCrumbItems
+    breadCrumbItems,
+    currentUrl
   } = props;
 
   return (
@@ -13,6 +15,10 @@ const Navigation = props => {
       })}
     </Breadcrumb>
   );
+}
+
+Navigation.propTypes = {
+  breadCrumbItems: PropTypes.array.isRequired
 }
 
 export default Navigation;
