@@ -16,8 +16,7 @@ const MaterialYoutube = [
   {
     id: 3,
     title: "Python Lesson 3 - Function Return Values and Debugging",
-    description: "Learn how to declare functions with multiple arguments, functions that return values,
-    and the basics of debugging using the PyCharm IDE.",
+    description: "Learn how to declare functions with multiple arguments, functions that return values, and the basics of debugging using the PyCharm IDE.",
     file_url: "https://www.youtube.com/embed/uPwztoPBVWI",
     active: true
   }
