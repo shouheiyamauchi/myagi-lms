@@ -80,7 +80,7 @@ class App extends Component {
           {notFound ? (
             <NotFound />
           ) : (
-            <Category />
+            <Category breadCrumbItems={breadCrumbItems} currentPageData={currentPageData} />
           )}
         </Layout.Content>
       </Layout>

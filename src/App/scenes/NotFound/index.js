@@ -1,12 +1,16 @@
 import React from 'react';
 import { Icon } from 'antd';
+import styles from './styles.module.scss';
 
 const NotFound = props => {
   return (
-    <div style={{ textAlign: 'center' }}>
-      <h1><Icon type="frown" /></h1>
-      <h1>404 Error</h1>
-      The requested page could not be found.
+    <div className={styles.container}>
+      <div className={styles.content}>
+        <Icon type="frown" style={{ fontSize: '100px' }} />
+        <br /><br />
+        <h1>404 Error</h1>
+        The requested page could not be found.
+      </div>
     </div>
   );
 }
