@@ -3,7 +3,7 @@ import data from 'data';
 
 class App extends Component {
   render() {
-    console.log(data.findLessonMaterials(1));
+    console.log(data.categoryWithAllChildren(1));
     return (
       <div>
         Myagi LMS

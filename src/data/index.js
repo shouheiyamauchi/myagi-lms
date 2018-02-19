@@ -8,6 +8,23 @@ import Category from './models/Category';
 import CategoryRelationship from './models/CategoryRelationship';
 
 const data = {
+  categoryWithAllChildren: function(categoryId) {
+    const categoryWithAllChildren = this.findCategory(categoryId);
+
+    categoryWithAllChildren.categories = this.findCategoryChildren(categoryId);
+    // get child categories of child categories
+    categoryWithAllChildren.categories.map((childCategory, index) => {
+      categoryWithAllChildren.categories[index] = this.categoryWithAllChildren(childCategory.id);
+    });
+
+    categoryWithAllChildren.lessons = this.findCategoryLessons(categoryId);
+    // get materials of lessons
+    categoryWithAllChildren.lessons.map((categoryLesson, index) => {
+      categoryWithAllChildren.lessons[index].materials = this.findLessonMaterials(categoryLesson.id);
+    });
+
+    return categoryWithAllChildren;
+  },
   findMaterial: function(materialProps) {
     const { material_type, material_id } = materialProps;
 
