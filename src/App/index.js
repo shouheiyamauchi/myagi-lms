@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import MockDatabase from 'MockDatabase';
+import 'antd/dist/antd.css'
+import { Layout } from 'antd';
+import NotFound from './scenes/NotFound';
+import Category from './scenes/Category';
 
 class App extends Component {
   constructor(props) {
@@ -8,9 +12,9 @@ class App extends Component {
     this.state = {
       data: {},
       currentPath: [],
-      notFound: false,
       breadCrumbItems: [],
-      currentPageData: {}
+      currentPageData: {},
+      notFound: false
     };
   }
 
@@ -24,6 +28,7 @@ class App extends Component {
   }
 
   getCurrentPath = () => {
+    // convert current URL path into array of IDs
     return window.location.pathname.split('/').filter(pathElement => pathElement !== '');
   }
 
@@ -64,11 +69,21 @@ class App extends Component {
 
   render() {
     const {
-      data
+      breadCrumbItems,
+      currentPageData,
+      notFound
     } = this.state;
 
     return (
-      <div><a href="">here</a></div>
+      <Layout style={{ minHeight: 'calc(100vh)' }}>
+        <Layout.Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
+          {notFound ? (
+            <NotFound />
+          ) : (
+            <Category />
+          )}
+        </Layout.Content>
+      </Layout>
     );
   }
 }
