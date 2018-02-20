@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import { List, Avatar, Divider } from 'antd';
 
-const CategoryList = props => {
+const LessonList = props => {
   const {
     match,
     currentCategoryData
@@ -12,16 +12,16 @@ const CategoryList = props => {
   return (
     <div>
       <div style={{ clear: 'left' }} />
-      <Divider>Categories</Divider>
+      <Divider>Lessons</Divider>
       <List
         itemLayout="horizontal"
-        dataSource={currentCategoryData.categories}
-        renderItem={category => (
+        dataSource={currentCategoryData.lessons}
+        renderItem={lesson => (
           <List.Item>
             <List.Item.Meta
-              avatar={<Avatar>{category.name[0]}</Avatar>}
-              title={<Link to={`${match.url}/${category.id}`}>{category.name}</Link>}
-              description={category.description}
+              avatar={<Avatar>{lesson.name[0]}</Avatar>}
+              title={<Link to={`/lessons/${lesson.id}`}>{lesson.name}</Link>}
+              description={lesson.description}
             />
           </List.Item>
         )}
@@ -30,9 +30,9 @@ const CategoryList = props => {
   );
 }
 
-CategoryList.propTypes = {
+LessonList.propTypes = {
   match: PropTypes.object.isRequired,
   currentCategoryData: PropTypes.object.isRequired
 }
 
-export default CategoryList;
+export default LessonList;

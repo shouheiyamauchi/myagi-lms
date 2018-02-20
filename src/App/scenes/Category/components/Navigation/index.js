@@ -11,7 +11,7 @@ const Navigation = props => {
   return (
     <div style={{ float: 'left' }}>
       {match.params.id === '1' ? (
-        <Link to={match.url}>Categories</Link>
+        <Link to={match.url}>Top</Link>
       ) : (
         <span>&nbsp;/&nbsp;<Link to={`${match.url}`}>{currentCategoryData.name}</Link></span>
       )}

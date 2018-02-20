@@ -3,21 +3,25 @@ import MockDatabase from 'MockDatabase';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Layout } from 'antd';
 import 'antd/dist/antd.css'
-import Category from './scenes/Category';
 import NotFound from './scenes/NotFound';
+import Category from './scenes/Category';
+import Lesson from './scenes/Lesson';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      data: {}
+      data: null
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.setState({
-      data: MockDatabase.categoryWithAllChildren(1)
+      data: {
+        id: 'root',
+        categories: [MockDatabase.categoryWithAllChildren(1)]
+      }
     });
   }
 
@@ -37,19 +41,15 @@ class App extends Component {
       minHeight: '280px'
     };
 
-    const parentCategoryData = {
-      id: 'root',
-      categories: [data]
-    }
-
     return (
       <Layout style={layoutStyle}>
         <Layout.Content style={layoutContentStyle}>
           <Router>
             <Switch>
               <Route exact path="/404" component={NotFound} />
-              <Route exact path="/categories" render={() => <Category match={{ params: {id: '1'}, url: '/categories', isExact: true }} parentCategoryData={parentCategoryData} />} />
-              <Route path="/categories" render={() => <Category match={{ params: {id: '1'}, url: '/categories' }} parentCategoryData={parentCategoryData} />} />
+              <Route exact path="/categories" render={() => <Category match={{ params: {id: '1'}, url: '/categories', isExact: true }} parentCategoryData={data} />} />
+              <Route path="/categories" render={() => <Category match={{ params: {id: '1'}, url: '/categories' }} parentCategoryData={data} />} />
+              <Route path="/lessons/:id" component={Lesson} />
               <Route component={NotFound} />
             </Switch>
           </Router>
