@@ -1,90 +1,58 @@
 import React, { Component } from 'react';
 import MockDatabase from 'MockDatabase';
-import 'antd/dist/antd.css'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Layout } from 'antd';
+import 'antd/dist/antd.css'
+import Category from './scenes/Category';
 import NotFound from './scenes/NotFound';
-import Content from './scenes/Content';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      data: {},
-      currentPath: [],
-      breadCrumbItems: [],
-      currentPageData: {
-        categories: [],
-        lessons: []
-      },
-      notFound: false
+      data: {}
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.setState({
-      data: MockDatabase.categoryWithAllChildren(1),
-      currentPath: this.getCurrentPath()
-    }, () => {
-      this.setCurrentPageData();
+      data: MockDatabase.categoryWithAllChildren(1)
     });
-  }
-
-  getCurrentPath = () => {
-    // convert current URL path into array of IDs
-    return window.location.pathname.split('/').filter(pathElement => pathElement !== '');
-  }
-
-  setCurrentPageData() {
-    let notFound;
-    let index = 0;
-
-    let lastParentCategory = this.state.data;
-    const breadCrumbItems = [
-      {
-        url: '/',
-        categoryName: 'Home'
-      }
-    ];
-
-    while(!notFound && this.state.currentPath[index]) {
-      const categoryId = parseInt(this.state.currentPath[index], 10);
-
-      lastParentCategory = this.getChildCategory(lastParentCategory, categoryId);
-
-      if (lastParentCategory) {
-        const url = breadCrumbItems[breadCrumbItems.length - 1].url + lastParentCategory.id + '/';
-        const categoryName = lastParentCategory.name;
-
-        breadCrumbItems.push({ url, categoryName });
-        index++;
-      } else {
-        notFound = true;
-      };
-    };
-
-    notFound ? this.setState({ notFound }) : this.setState({ currentPageData: lastParentCategory, breadCrumbItems });
-  }
-
-  getChildCategory(parentCategoryObject, childCategoryId) {
-    return parentCategoryObject.categories.find(childCategoryObject => childCategoryObject.id === childCategoryId);
   }
 
   render() {
     const {
-      breadCrumbItems,
-      currentPageData,
-      notFound
+      data
     } = this.state;
 
+    const layoutStyle = {
+      minHeight: '100vh'
+    };
+
+    const layoutContentStyle = {
+      margin: '24px 16px',
+      padding: '24px',
+      background: '#fff',
+      minHeight: '280px'
+    };
+
+    const parentCategoryData = {
+      id: 'root',
+      categories: [data]
+    }
+
     return (
-      <Layout style={{ minHeight: 'calc(100vh)' }}>
-        <Layout.Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
-          {notFound ? (
-            <NotFound />
-          ) : (
-            <Content breadCrumbItems={breadCrumbItems} currentPageData={currentPageData} />
-          )}
+      <Layout style={layoutStyle}>
+        <Layout.Content style={layoutContentStyle}>
+          <Router>
+            <Switch>
+              <Route exact path="/404" component={NotFound} />
+              <Route exact path="/categories" render={() => <Category match={{ params: {id: '1'}, url: '/categories', isExact: true }} parentCategoryData={parentCategoryData} />} />
+              <Route path="/categories" render={() => <Category match={{ params: {id: '1'}, url: '/categories' }} parentCategoryData={parentCategoryData} />} />
+              <Route component={NotFound} />
+            </Switch>
+          </Router>
         </Layout.Content>
       </Layout>
     );
