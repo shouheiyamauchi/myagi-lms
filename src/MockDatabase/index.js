@@ -1,3 +1,4 @@
+import update from 'immutability-helper';
 import MaterialYoutube from './models/MaterialYoutube';
 import MaterialText from './models/MaterialText';
 import MaterialMultipleChoiceQuestion from './models/MaterialMultipleChoiceQuestion';
@@ -30,7 +31,8 @@ const MockDatabase = {
       MaterialMultipleChoiceQuestion: MaterialMultipleChoiceQuestion
     }[material_type];
 
-    return MaterialModel.find(material => material.id === material_id);
+    // add material type to object
+    return update(MaterialModel.find(material => material.id === material_id), {materialType: { $set: material_type }});
   },
   findMaterialsByMaterialPropsArray: function(materialPropsArray) {
     const materialsArray = [];

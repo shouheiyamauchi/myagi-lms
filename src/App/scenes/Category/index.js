@@ -13,7 +13,7 @@ const Category = props => {
 
   if (parentCategoryData === null) return <div>Loading...</div>;
 
-  const currentCategoryData = parentCategoryData.categories.find(category => category.id === parseInt(match.params.id));
+  const currentCategoryData = parentCategoryData.categories.find(category => category.id === parseInt(match.params.id, 10));
 
    if (currentCategoryData) {
     return (

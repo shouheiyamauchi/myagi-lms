@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MockDatabase from 'MockDatabase';
 import { Redirect } from "react-router-dom";
+import Material from './components/Material';
 
 class Lesson extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class Lesson extends Component {
 
   componentDidMount() {
     this.setState({
-      lessonData: MockDatabase.findLesson(parseInt(this.props.match.params.id))
+      lessonData: MockDatabase.findLesson(parseInt(this.props.match.params.id, 10))
     });
   }
 
@@ -26,12 +27,19 @@ class Lesson extends Component {
       lessonData
     } = this.state;
 
-    return (
-      <div>
-        <h1>{lessonData.name}</h1>
-        <p>{lessonData.description}</p>
-      </div>
-    );
+    if (lessonData) {
+      return (
+        <div>
+          <h1>{lessonData.name}</h1>
+          <p>{lessonData.description}</p>
+          {lessonData.materials.map((material, index) => {
+            return <Material key={index} />
+          })}
+        </div>
+      );
+    } else {
+      return <Redirect push to="/404" />;
+    };
   }
 }
 
