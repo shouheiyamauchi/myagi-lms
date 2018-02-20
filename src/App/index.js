@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import MockDatabase from 'MockDatabase';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Layout } from 'antd';
 import 'antd/dist/antd.css'
+import ForwardBackButtons from './components/ForwardBackButtons';
+import Home from './scenes/Home';
 import NotFound from './scenes/NotFound';
 import Category from './scenes/Category';
 import Lesson from './scenes/Lesson';
@@ -44,8 +46,10 @@ class App extends Component {
     return (
       <Layout style={layoutStyle}>
         <Layout.Content style={layoutContentStyle}>
+          <ForwardBackButtons />
           <Router>
             <Switch>
+              <Route exact path="/" component={Home} />
               <Route exact path="/404" component={NotFound} />
               <Route exact path="/categories" render={() => <Category match={{ params: {id: '1'}, url: '/categories', isExact: true }} parentCategoryData={data} />} />
               <Route path="/categories" render={() => <Category match={{ params: {id: '1'}, url: '/categories' }} parentCategoryData={data} />} />

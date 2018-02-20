@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import CategoryList from './scenes/CategoryList';
 import LessonList from './scenes/LessonList';
+import styles from './styles.module.scss';
 
 const Category = props => {
   const {
@@ -22,7 +23,10 @@ const Category = props => {
         <Route path={`${props.match.url}/:id`} render={(urlParams) => <Category {...urlParams} parentCategoryData={currentCategoryData} />} />
 
         {props.match.isExact && (
-          <div>
+          <div className={styles.categoryContainer}>
+            <br />
+            <h1>{currentCategoryData.name}</h1>
+            <p>{currentCategoryData.description}</p>
             <CategoryList match={match} currentCategoryData={currentCategoryData} />
             <LessonList match={match} currentCategoryData={currentCategoryData} />
           </div>

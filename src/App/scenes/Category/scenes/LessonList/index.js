@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { List, Avatar, Divider } from 'antd';
 
 const LessonList = props => {
@@ -11,7 +11,6 @@ const LessonList = props => {
 
   return (
     <div>
-      <div style={{ clear: 'left' }} />
       <Divider>Lessons</Divider>
       <List
         itemLayout="horizontal"

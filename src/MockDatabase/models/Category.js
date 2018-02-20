@@ -1,7 +1,7 @@
 const Category = [
   {
     id: 1,
-    name: "Root",
+    name: "Top",
     description: "",
     active: true
   },

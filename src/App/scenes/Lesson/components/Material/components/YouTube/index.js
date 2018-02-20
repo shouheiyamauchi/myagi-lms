@@ -12,9 +12,9 @@ const Youtube = props => {
       <iframe
         width="100%"
         src={materialData.video_url}
-        frameborder="0"
+        frameBorder="0"
         allow="autoplay; encrypted-media"
-        allowfullscreen
+        allowFullScreen
       />
     </div>
   );

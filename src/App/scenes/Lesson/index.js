@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MockDatabase from 'MockDatabase';
-import { Redirect } from "react-router-dom";
+import { Redirect } from 'react-router-dom';
 import { Tabs, Divider } from 'antd';
 import Material from './components/Material';
 import styles from './styles.module.scss';
@@ -36,7 +36,6 @@ class Lesson extends Component {
         <div>
           <h1>{lessonData.name}</h1>
           <p>{lessonData.description}</p>
-          <br />
           <Divider>Lesson Materials</Divider>
           {!lessonData.materials.length && (
             <div className={styles.noData}>No data</div>
