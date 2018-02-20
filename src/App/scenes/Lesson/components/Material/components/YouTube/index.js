@@ -11,6 +11,7 @@ const Youtube = props => {
     <div className={styles.videoContainer}>
       <iframe
         width="100%"
+        title={materialData.video_url}
         src={materialData.video_url}
         frameBorder="0"
         allow="autoplay; encrypted-media"

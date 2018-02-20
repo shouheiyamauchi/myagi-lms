@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MockDatabase from 'MockDatabase';
+import update from 'immutability-helper';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Layout } from 'antd';
 import 'antd/dist/antd.css'
@@ -14,22 +15,28 @@ class App extends Component {
     super(props);
 
     this.state = {
-      data: null
+      parentCategoryData: null,
+      displaySubCategoryLessons: true
     };
   }
 
   componentDidMount() {
     this.setState({
-      data: {
+      parentCategoryData: {
         id: 'root',
         categories: [MockDatabase.categoryWithAllChildren(1)]
       }
     });
   }
 
+  displaySubCategoryLessonsToggle = e => {
+    this.setState({ displaySubCategoryLessons: e.target.checked });
+  }
+
   render() {
     const {
-      data
+      parentCategoryData,
+      displaySubCategoryLessons
     } = this.state;
 
     const layoutStyle = {
@@ -43,6 +50,15 @@ class App extends Component {
       minHeight: '280px'
     };
 
+    const categoryParams = {
+      match: { params: {id: '1'}, url: '/categories' },
+      displaySubCategoryLessonsToggle: this.displaySubCategoryLessonsToggle,
+      displaySubCategoryLessons,
+      parentCategoryData
+    };
+
+    const exactCategoryParams = update(categoryParams, { match: { isExact: { $set: true } } });
+
     return (
       <Layout style={layoutStyle}>
         <Layout.Content style={layoutContentStyle}>
@@ -51,8 +67,8 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/404" component={NotFound} />
-              <Route exact path="/categories" render={() => <Category match={{ params: {id: '1'}, url: '/categories', isExact: true }} parentCategoryData={data} />} />
-              <Route path="/categories" render={() => <Category match={{ params: {id: '1'}, url: '/categories' }} parentCategoryData={data} />} />
+              <Route exact path="/categories" render={() => <Category {...exactCategoryParams} />} />
+              <Route path="/categories" render={() => <Category {...categoryParams} />} />
               <Route path="/lessons/:id" component={Lesson} />
               <Route component={NotFound} />
             </Switch>
