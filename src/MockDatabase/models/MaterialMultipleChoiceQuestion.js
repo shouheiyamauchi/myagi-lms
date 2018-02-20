@@ -11,6 +11,20 @@ const MaterialMultipleChoiceQuestion = [
     ],
     correct_answer: 0,
     active: true
+  },
+  {
+    id: 2,
+    title: "C History Quiz",
+    question: "C Programming was created at ______ by Dennis Ritchie.",
+    options: [
+      "Stanford Lab",
+      "Haward University",
+      "AT&T Bell Laboratory",
+      "L&T Laboratory",
+      "MIT University"
+    ],
+    correct_answer: 2,
+    active: true
   }
 ];
 

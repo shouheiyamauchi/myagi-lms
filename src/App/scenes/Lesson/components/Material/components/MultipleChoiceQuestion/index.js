@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Radio } from 'antd';
+import styles from './styles.module.scss';
 
 const RadioGroup = Radio.Group;
 
@@ -40,7 +41,7 @@ class MultipleChoiceQuestion extends Component {
           {materialData.options.map((option, index) => <Radio key={index} style={radioStyle} value={index}>{option}</Radio>)}
         </RadioGroup>
         <br /><br />
-        {(selectedOption !== null) && (selectedOption === materialData.correct_answer ? <span>That is correct!</span> : <span>That is incorrect!</span>)}
+        {(selectedOption !== null) && (selectedOption === materialData.correct_answer ? <span className={styles.correctAnswer}>That is correct!</span> : <span className={styles.wrongAnswer}>That is incorrect!</span>)}
       </div>
     );
   }

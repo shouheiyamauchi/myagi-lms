@@ -26,6 +26,20 @@ const CategoryRelationship = [
     child_category_id: 5,
     index: 1,
     active: true
+  },
+  {
+    id: 5,
+    parent_category_id: 3,
+    child_category_id: 6,
+    index: 2,
+    active: true
+  },
+  {
+    id: 6,
+    parent_category_id: 6,
+    child_category_id: 7,
+    index: 1,
+    active: true
   }
 ];
 

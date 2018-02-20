@@ -12,6 +12,13 @@ const CategoryLesson = [
     lesson_id: 2,
     index: 2,
     active: true
+  },
+  {
+    id: 3,
+    category_id: 7,
+    lesson_id: 3,
+    index: 1,
+    active: true
   }
 ];
 

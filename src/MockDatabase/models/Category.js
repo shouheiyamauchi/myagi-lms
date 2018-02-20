@@ -28,6 +28,18 @@ const Category = [
     name: "Python",
     description: "Learn how to program in Python.",
     active: true
+  },
+  {
+    id: 6,
+    name: "Procedural Language",
+    description: "Category of procedural programming languages.",
+    active: true
+  },
+  {
+    id: 7,
+    name: "C",
+    description: "Learn how to program in C.",
+    active: true
   }
 ];
 
