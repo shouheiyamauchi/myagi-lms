@@ -11,7 +11,7 @@ const CategoryList = props => {
 
   return (
     <div>
-      <Divider>Categories</Divider>
+      <Divider>Subcategories</Divider>
       <List
         itemLayout="horizontal"
         dataSource={currentCategoryData.categories}
