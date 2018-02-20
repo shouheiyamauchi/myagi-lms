@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Card } from 'antd';
 import MultipleChoiceQuestion from './components/MultipleChoiceQuestion';
 import Text from './components/Text';
-import Youtube from './components/Youtube';
+import YouTube from './components/YouTube';
 
 const Material = props => {
   const {
@@ -13,7 +13,7 @@ const Material = props => {
   const MaterialDisplay = {
     MaterialMultipleChoiceQuestion: <MultipleChoiceQuestion materialData={materialData} />,
     MaterialText: <Text materialData={materialData} />,
-    MaterialYoutube: <Youtube materialData={materialData} />
+    MaterialYoutube: <YouTube materialData={materialData} />
   }[materialData.materialType];
 
   return (
