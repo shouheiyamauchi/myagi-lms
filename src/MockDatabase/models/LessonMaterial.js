@@ -21,11 +21,18 @@ const LessonMaterial = [
     index: 3
   },
   {
-    id: 2,
+    id: 4,
     lesson_id: 1,
     material_type: "MaterialYoutube",
     material_id: 3,
     index: 4
+  },
+  {
+    id: 5,
+    lesson_id: 1,
+    material_type: "MaterialMultipleChoiceQuestion",
+    material_id: 1,
+    index: 5
   }
 ];
 
